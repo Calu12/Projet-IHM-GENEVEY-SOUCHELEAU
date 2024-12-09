@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Annonces d'emploi</h2>
     <q-list>
       <q-item v-for="announcement in announcements" :key="announcement.id">
         <q-item-section>

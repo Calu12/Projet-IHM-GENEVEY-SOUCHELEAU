@@ -1,6 +1,5 @@
 <template>
-  <header>
-    <div>
+y    <div>
       <q-input
         filled
         v-model="search"
@@ -12,7 +11,7 @@
     <div v-if="userType === 'entreprise'">
       <q-btn label="Poster une annonce" color="primary" @click="postAnnouncement" />
     </div>
-  </header>
+  
   <!--
   <q-page class="flex flex-center">
     <container>
