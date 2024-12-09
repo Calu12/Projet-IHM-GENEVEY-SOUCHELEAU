@@ -8,8 +8,17 @@
         placeholder="Type to search..."
         class="q-mb-md search-bar"
       />
-      <div v-if="userType === 'entreprise'" class="post-btn-container">
+
+      <div
+        v-if="localStorage.getItem('currentUser').userType === 'entreprise'"
+        class="post-btn-container"
+      >
         <q-btn label="Poster une annonce" color="primary" @click="postAnnouncement" />
+      </div>
+      <div v-if="!localStorage.getItem('currentUser')" class="post-btn-container">
+        <q-btn label="Se connecter" color="primary" @click="postLogIn" />
+        <q-btn label="S'inscrire entreprise" color="primary" @click="postSignInEntreprise" />
+        <q-btn label="S'inscrire particulier" color="primary" @click="postSigninParticulier" />
       </div>
     </div>
 
@@ -27,10 +36,11 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import AnnouncementList from 'components/AnnouncementList.vue'
 
+const router = useRouter()
 const search = ref('')
-const userType = ref('entreprise') // ou 'particulier'
 
 const announcements = ref([
   {
@@ -110,6 +120,14 @@ const filteredAnnouncements = computed(() => {
 function postAnnouncement() {
   // Logique pour poster une annonce
   console.log('Poster une annonce')
+}
+
+function postSignInEntreprise() {
+  router.push('/signupc')
+}
+
+function postSigninParticulier() {
+  router.push('/signupi')
 }
 </script>
 <style>

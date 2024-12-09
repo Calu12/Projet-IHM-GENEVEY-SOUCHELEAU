@@ -56,7 +56,7 @@ if (userType.value === 'entreprise') {
       link: 'https://forum.quasar.dev',
     },
   ]
-} else {
+} else if (userType.value === 'particulier') {
   linksList.value = [
     {
       title: 'Profil Particulier',
@@ -75,6 +75,16 @@ if (userType.value === 'entreprise') {
       caption: 'forum.quasar.dev',
       icon: 'record_voice_over',
       link: 'https://forum.quasar.dev',
+    },
+  ]
+  // si pas connecté
+} else if (userType.value === 'unknown') {
+  linksList.value = [
+    {
+      title: 'Connection',
+      caption: 'quasar.dev',
+      icon: 'person',
+      link: 'https://quasar.dev',
     },
   ]
 }
