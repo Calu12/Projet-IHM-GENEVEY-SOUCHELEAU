@@ -5,6 +5,11 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       {
+        path: '/announce/:id',
+        component: () => import('pages/AnnonceDetailsPage.vue'), // La page de détail de l'annonce
+        props: true, // Passe l'ID comme prop à la page
+      },
+      {
         path: '/signupc',
         name: 'signupc',
         component: () => import('pages/SignupCompanyPage.vue'),

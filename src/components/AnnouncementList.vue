@@ -15,6 +15,10 @@
 
 <script setup>
 import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'  // Importer useRouter pour pouvoir naviguer
+
+// Initialiser le router
+const router = useRouter()
 
 const props = defineProps({
   announcements: {
@@ -24,7 +28,7 @@ const props = defineProps({
 })
 
 function viewMore(id) {
-  // Logique pour afficher plus de détails sur l'annonce
-  console.log("Voir plus pour l'annonce avec ID:", id)
+  // Rediriger vers la page de détails de l'annonce
+  router.push({ path: `/announce/${id}` })
 }
 </script>
