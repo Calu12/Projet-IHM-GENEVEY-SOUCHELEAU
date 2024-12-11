@@ -38,11 +38,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import AnnouncementList from 'components/AnnouncementList.vue'
-<<<<<<< HEAD
-=======
-//import { name } from '@vue/eslint-config-prettier/skip-formatting';
-//ici je l'ai mis en  commentaire pck je n'ai pas compris à quoi il servait et qu'il n'était pas utilisé dans le code
->>>>>>> 15bf56acf640535c2c27baea60a838e9cdcf8acf
+
 
 const router = useRouter()
 const search = ref('')
@@ -50,13 +46,9 @@ const search = ref('')
 const announcements = ref([])
 
 function initializeLocalStorage() {
-<<<<<<< HEAD
   const existingAnnonces = localStorage.getItem('announcements');
   if (!existingAnnonces) {
-=======
-  const existingData = localStorage.getItem('announcements')
-  if (!existingData) {
->>>>>>> 15bf56acf640535c2c27baea60a838e9cdcf8acf
+
     const initialData = [
       {
         id: 1,
@@ -122,19 +114,12 @@ function initializeLocalStorage() {
     localStorage.setItem('announcements', JSON.stringify(initialData))
     announcements.value = initialData
   } else {
-<<<<<<< HEAD
     announcements.value = JSON.parse(existingAnnonces);
   }
 
   const existingUsers = localStorage.getItem('users');
   if (!existingUsers) {
-=======
-    announcements.value = JSON.parse(existingData)
-  }
 
-  existingData = localStorage.getItem('users')
-  if (!existingData) {
->>>>>>> 15bf56acf640535c2c27baea60a838e9cdcf8acf
     const initialData = [
       {
         id: 0,
