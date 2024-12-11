@@ -10,12 +10,12 @@
       />
 
       <div
-        v-if="localStorage.getItem('currentUser').userType === 'entreprise'"
+        v-if="currentUser&&currentUser.userType === 'Entreprise'"
         class="post-btn-container"
       >
         <q-btn label="Poster une annonce" color="primary" @click="postAnnouncement" />
       </div>
-      <div v-if="!localStorage.getItem('currentUser')" class="post-btn-container">
+      <div v-if="!currentUser" class="post-btn-container">
         <q-btn label="Se connecter" color="primary" @click="postLogIn" />
         <q-btn label="S'inscrire entreprise" color="primary" @click="postSignInEntreprise" />
         <q-btn label="S'inscrire particulier" color="primary" @click="postSigninParticulier" />
@@ -44,6 +44,7 @@ const router = useRouter()
 const search = ref('')
 //const userType = ref('entreprise') // ou 'particulier'
 const announcements = ref([])
+const currentUser = ref(null);
 
 function initializeLocalStorage() {
   const existingAnnonces = localStorage.getItem('announcements');
@@ -140,6 +141,7 @@ function initializeLocalStorage() {
     ]
     localStorage.setItem('users', JSON.stringify(initialData))
   }
+  currentUser.value = JSON.parse(localStorage.getItem('currentUser'));
 }
 
 onMounted(() => {
