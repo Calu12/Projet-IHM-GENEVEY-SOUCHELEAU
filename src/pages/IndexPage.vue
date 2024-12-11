@@ -28,15 +28,14 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import AnnouncementList from 'components/AnnouncementList.vue'
-import { name } from '@vue/eslint-config-prettier/skip-formatting';
 
 const search = ref('')
 const userType = ref('entreprise') // ou 'particulier'
 const announcements = ref([]);
 
 function initializeLocalStorage() {
-  const existingData = localStorage.getItem('announcements');
-  if (!existingData) {
+  const existingAnnonces = localStorage.getItem('announcements');
+  if (!existingAnnonces) {
     const initialData = [
   {
     id: 1,
@@ -102,11 +101,11 @@ function initializeLocalStorage() {
     localStorage.setItem('announcements', JSON.stringify(initialData));
     announcements.value = initialData;
   } else {
-    announcements.value = JSON.parse(existingData);
+    announcements.value = JSON.parse(existingAnnonces);
   }
 
-  existingData = localStorage.getItem('users');
-  if (!existingData) {
+  const existingUsers = localStorage.getItem('users');
+  if (!existingUsers) {
     const initialData = [
         {
           id: 0,
