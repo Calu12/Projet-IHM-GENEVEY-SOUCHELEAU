@@ -9,6 +9,16 @@ const routes = [
         component: () => import('pages/AnnonceDetailsPage.vue'), // La page de détail de l'annonce
         props: true, // Passe l'ID comme prop à la page
       },
+      {
+        path: '/signupc',
+        name: 'signupc',
+        component: () => import('pages/SignupCompanyPage.vue'),
+      },
+      {
+        path: '/signupi',
+        name: 'signupi',
+        component: () => import('pages/SignupIndividualPage.vue'),
+      },
     ],
   },
 
