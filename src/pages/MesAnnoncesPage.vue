@@ -15,7 +15,7 @@
               <q-card class="q-ma-md">
                 <q-card-section>
                   <div class="text-h6">Annonce : {{ selectedAnnonce.title }}</div>
-                  <p>{{ selectedAnnonce.description }}</p>
+                  <!--<p>{{ selectedAnnonce.description }}</p>-->
                 </q-card-section>
                 <q-separator></q-separator>
                 <q-card-section>

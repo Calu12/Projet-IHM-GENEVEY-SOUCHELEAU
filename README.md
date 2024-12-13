@@ -23,8 +23,8 @@
 
 Ce projet est accompagné d'une documentation détaillée incluant :
 
-- **Cahier des charges** : Spécifications complètes des fonctionnalités et contraintes techniques.
-- **Modèles et scénarios** : Scénarios utilisateurs illustrant les parcours clés (inscription, publication, candidature, messagerie).
+- **Cahier des charges** : Spécifications complètes des fonctionnalités et contraintes techniques : docs/cahier_des_charges.pdf
+- **Modèles et scénarios** : Scénarios utilisateurs illustrant les parcours clés (inscription, publication, candidature, messagerie) : docs/scenarios.pdf, docs/modeles.pdf
 - **Maquettes Figma** : https://www.figma.com/design/oa53L9NW8Z9bidmNa0i1CO/Maquette-Connect-Work?node-id=0-1&t=gtwf3rAdTwSBVs9J-1
 
 ## Installation et utilisation
@@ -36,7 +36,10 @@ npm install -g @quasar/cli
 ```
 - Clonez le dépôt et placez-vous dans le dossier du projet :
 ```bash
-cd chemin/vers/connectwork
+git clone https://github.com/Calu12/Projet-IHM-GENEVEY-SOUCHELEAU.git
+```
+```bash
+cd chemin/vers/Projet-IHM-GENEVEY-SOUCHELEAU
 ```
 - Installez les dépendances locales :
 ```bash
