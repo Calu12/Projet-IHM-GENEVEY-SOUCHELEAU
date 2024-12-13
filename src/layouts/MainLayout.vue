@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
         <q-toolbar-title>Connect Work</q-toolbar-title>
-        <div>{{ currentUser.name || "Visiteur" }}</div>
+        <div>{{ txtAccueil }}</div>
       </q-toolbar>
     </q-header>
 
@@ -42,6 +42,7 @@ const router = useRouter()
 const leftDrawerOpen = ref(false)
 const currentUser = ref(null)
 const linksList = ref([])
+const txtAccueil = ref("Visiteur")
 
 // Fonction pour récupérer l'utilisateur du localStorage
 function fetchCurrentUser() {
@@ -58,6 +59,7 @@ function updateLinksList() {
   if (currentUser.value) {
     const userType = currentUser.value.userType
     if (userType === 'Entreprise') {
+      txtAccueil.value = currentUser.value.name;
       linksList.value = [
         { title: 'Home', icon: 'home', link: '/' },
         { title: 'Mon Profil', icon: 'business', link: '/profile/'+currentUser.value.id },
@@ -65,6 +67,7 @@ function updateLinksList() {
         { title: 'Répertoire', icon: 'record_voice_over', link: '/contacts' },
       ]
     } else if (userType === 'Individu') {
+      txtAccueil.value = currentUser.value.name+' '+currentUser.value.surname;
       linksList.value = [
         { title: 'Home', icon: 'home', link: '/' },
         { title: 'Mon Profil ', icon: 'person', link: '/profile/'+currentUser.value.id },
