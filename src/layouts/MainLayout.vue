@@ -88,7 +88,7 @@ function updateLinksList() {
 onMounted(() => {
   fetchCurrentUser()
   updateLinksList()
-
+})
   // Surveillance de changes dans localStorage pour currentUser
   const interval = setInterval(() => {
     const newUser = localStorage.getItem('currentUser')
@@ -96,13 +96,13 @@ onMounted(() => {
       fetchCurrentUser() // Mettre à jour currentUser
       updateLinksList()   // Mettre à jour la liste des liens
     }
-  }, 3000) // Vérification toutes les 3 secondes
+  }, 1000) // Vérification toutes les 3 secondes
 
   // Nettoyage lors de la destruction du composant
   onBeforeUnmount(() => {
     clearInterval(interval)
   })
-})
+
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
