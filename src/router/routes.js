@@ -43,6 +43,11 @@ const routes = [
         path: "/messagerie",
         name: "Messagerie",
         component: () => import("pages/MessageriePage.vue"),
+      },
+      {
+        path: "mes-annonces",
+        name: "MesAnnonces",
+        component: () => import("pages/MesAnnoncesPage.vue"),
       }
     ],
   },

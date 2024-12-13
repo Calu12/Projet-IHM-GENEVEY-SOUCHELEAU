@@ -65,6 +65,7 @@ function updateLinksList() {
         { title: 'Mon Profil', icon: 'business', link: '/profile/'+currentUser.value.id },
         { title: 'Messagerie', icon: 'chat', link: '/messagerie' },
         { title: 'Répertoire', icon: 'record_voice_over', link: '/contacts' },
+        { title: 'Mes Annonces', icon: 'list', link: '/mes-annonces' },
       ]
     } else if (userType === 'Individu') {
       txtAccueil.value = currentUser.value.name+' '+currentUser.value.surname;
