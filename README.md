@@ -36,7 +36,10 @@ npm install -g @quasar/cli
 ```
 - Clonez le dépôt et placez-vous dans le dossier du projet :
 ```bash
-cd chemin/vers/connectwork
+git clone https://github.com/Calu12/Projet-IHM-GENEVEY-SOUCHELEAU.git
+```
+```bash
+cd chemin/vers/Projet-IHM-GENEVEY-SOUCHELEAU
 ```
 - Installez les dépendances locales :
 ```bash
