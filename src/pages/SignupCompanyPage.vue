@@ -93,7 +93,7 @@ const router = useRouter();
 
 // Les données du formulaire
 const formData = ref({
-  id: Date.now(),
+  id: JSON.parse(localStorage.getItem('users')).length,
   userType: 'Entreprise',
   name: '',
   secteur: '',
@@ -128,13 +128,15 @@ function handleSignup() {
     telContact: formData.value.telContact,
     siteWeb: formData.value.siteWeb,
     annonces: formData.value.annonces,
+    contacts: formData.value.contacts,
     email: formData.value.email,
   });
+  const currentUser = {id: formData.value.id, userType: formData.value.userType, name: formData.value.name}
 
   // Sauvegarde des utilisateurs dans le localStorage
   localStorage.setItem('users', JSON.stringify(users));
-  const currentUser = {id: formData.value.id, userType: formData.value.userType, name: formData.value.name}
-  localStorage.setItem('currentUser', currentUser)
+  
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
   // Redirection vers une autre page après l'inscription
   router.push('/');
