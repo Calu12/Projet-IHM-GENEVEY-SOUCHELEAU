@@ -11,8 +11,8 @@
             @click="selectContact(contact)"
           >
             <q-item-section>
-              <div class="text-subtitle1">{{ contact.name }}</div>
-              <div class="text-caption">{{ contact.email }}</div>
+              <div class="text-subtitle1 overflow-text">{{ contact.name }}</div>
+              <div class="text-caption overflow-text">{{ contact.email }}</div>
             </q-item-section>
           </q-item>
         </q-list>
@@ -151,6 +151,12 @@
   }
   .bg-grey-4 {
     background-color: #d6d6d6;
+  }
+  .overflow-text {
+  white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
+  overflow: hidden; /* Cache le texte qui dépasse */
+  text-overflow: ellipsis; /* Ajoute des points de suspension si le texte dépasse */
+  width: 100%; /* Assurez-vous que l'élément prend toute la largeur disponible */
   }
   </style>
   
