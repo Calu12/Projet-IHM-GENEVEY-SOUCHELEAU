@@ -11,38 +11,53 @@
           :rules="[(val) => !!val || 'Le nom est requis']"
         />
         <q-input
-          v-model="formData.name2"
+          v-model="formData.secteur"
           label="Secteur d'activité"
           filled
           class="q-mb-md"
-          :rules="[(val) => !!val || 'Le secetur d\'activité est requis']"
+          :rules="[(val) => !!val || 'Le secteur d\'activité est requis']"
         />
         <q-input
-          v-model="formData.text"
+          v-model="formData.description"
           label="Description de l'entreprise"
-          type="descr"
+          type="textarea"
           filled
           class="q-mb-md"
         />
         <q-input
           v-model="formData.adresse"
           label="Adresse"
-          type="adresse"
+          type="text"
           filled
           class="q-mb-md"
           :rules="[(val) => !!val || 'L’adresse est requise']"
         />
         <q-input
-          v-model="formData.name3"
+          v-model="formData.nomContact"
           label="Nom du responsable"
           filled
           class="q-mb-md"
           :rules="[(val) => !!val || 'Le nom est requis']"
         />
-        <q-input v-model="formData.site" label="Siteweb de l\'entreprise" filled class="q-mb-md" />
+        <q-input v-model="formData.siteWeb" label="Site web de l'entreprise" filled class="q-mb-md" />
+        <q-input
+          v-model="formData.emailContact"
+          label="Email du contact"
+          type="email"
+          filled
+          class="q-mb-md"
+          :rules="[(val) => !!val || 'L’email est requis']"
+        />
+        <q-input
+          v-model="formData.telContact"
+          label="Téléphone"
+          type="tel"
+          filled
+          class="q-mb-md"
+        />
         <q-input
           v-model="formData.email"
-          label="Email"
+          label="Email du compte"
           type="email"
           filled
           class="q-mb-md"
@@ -71,27 +86,58 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 
 // Les données du formulaire
 const formData = ref({
-  type: 'Entreprise',
+  id: Date.now(),
+  userType: 'Entreprise',
   name: '',
+  secteur: '',
+  description: '',
+  adresse: '',
+  nomContact: '',
+  emailContact: '',
+  telContact: '',
+  siteWeb: '',
   email: '',
+  annonces: [],
+  contacts: [],
   password: '',
   confirmPassword: '',
-})
+});
 
 // Gestion de la soumission du formulaire
 function handleSignup() {
-  // Sauvegarde des données localement
-  localStorage.setItem('userData', JSON.stringify(formData.value))
+  // Récupérer les utilisateurs existants ou initialiser un tableau vide
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Ajouter l'utilisateur actuel au tableau
+  users.push({
+    id: formData.value.id,
+    userType: formData.value.userType,
+    name: formData.value.name,
+    secteur: formData.value.secteur,
+    description: formData.value.description,
+    adresse: formData.value.adresse,
+    nomContact: formData.value.nomContact,
+    emailContact: formData.value.emailContact,
+    telContact: formData.value.telContact,
+    siteWeb: formData.value.siteWeb,
+    annonces: formData.value.annonces,
+    email: formData.value.email,
+  });
+
+  // Sauvegarde des utilisateurs dans le localStorage
+  localStorage.setItem('users', JSON.stringify(users));
+  const currentUser = {id: formData.value.id, userType: formData.value.userType, name: formData.value.name}
+  localStorage.setItem('currentUser', currentUser)
 
   // Redirection vers une autre page après l'inscription
-  router.push('/')
+  router.push('/');
 }
 </script>
 

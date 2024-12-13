@@ -19,6 +19,31 @@ const routes = [
         name: 'signupi',
         component: () => import('pages/SignupIndividualPage.vue'),
       },
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('pages/LoginPage.vue'),
+      },
+      {
+        path: '/add-annonce',
+        name: 'add-annonce',
+        component: () => import('pages/AjoutAnnoncePage.vue'),
+      },
+      {
+        path: '/contacts',
+        name: 'contacts',
+        component: () => import('pages/ContactsPage.vue'),
+      },
+      {
+        path: "/profile/:id",
+        name: "Profile",
+        component: () => import("pages/ProfilePage.vue"),
+      },
+      {
+        path: "/messagerie",
+        name: "Messagerie",
+        component: () => import("pages/MessageriePage.vue"),
+      }
     ],
   },
 

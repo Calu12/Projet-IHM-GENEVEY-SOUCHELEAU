@@ -3,10 +3,8 @@
     <q-header elevated>
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-
-        <q-toolbar-title> Connect Work </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title>Connect Work</q-toolbar-title>
+        <div>{{ currentUser.name || "Visiteur" }}</div>
       </q-toolbar>
     </q-header>
 
@@ -14,7 +12,17 @@
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
+        <q-item v-for="link in linksList" :key="link.title" class="q-my-sm">
+          <q-btn
+            flat
+            dense
+            icon-left
+            :icon="link.icon"
+            :label="link.title"
+            color="primary"
+            @click="navigateTo(link.link)"
+          />
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -26,70 +34,77 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import AnnouncementList from 'components/AnnouncementList.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const leftDrawerOpen = ref(false)
-const userType = ref('entreprise') // or 'particulier'
-
+const currentUser = ref(null)
 const linksList = ref([])
 
-if (userType.value === 'entreprise') {
-  linksList.value = [
-    {
-      title: 'Profil Entreprise',
-      caption: 'quasar.dev',
-      icon: 'business',
-      link: 'https://quasar.dev',
-    },
-    {
-      title: 'Messagerie Entreprise',
-      caption: 'chat.quasar.dev',
-      icon: 'chat',
-      link: 'https://chat.quasar.dev',
-    },
-    {
-      title: 'Répertoire Entreprise',
-      caption: 'forum.quasar.dev',
-      icon: 'record_voice_over',
-      link: 'https://forum.quasar.dev',
-    },
-  ]
-} else if (userType.value === 'particulier') {
-  linksList.value = [
-    {
-      title: 'Profil Particulier',
-      caption: 'quasar.dev',
-      icon: 'person',
-      link: 'https://quasar.dev',
-    },
-    {
-      title: 'Messagerie Particulier',
-      caption: 'chat.quasar.dev',
-      icon: 'chat',
-      link: 'https://chat.quasar.dev',
-    },
-    {
-      title: 'Répertoire Particulier',
-      caption: 'forum.quasar.dev',
-      icon: 'record_voice_over',
-      link: 'https://forum.quasar.dev',
-    },
-  ]
-  // si pas connecté
-} else if (userType.value === 'unknown') {
-  linksList.value = [
-    {
-      title: 'Connection',
-      caption: 'quasar.dev',
-      icon: 'person',
-      link: 'https://quasar.dev',
-    },
-  ]
+// Fonction pour récupérer l'utilisateur du localStorage
+function fetchCurrentUser() {
+  try {
+    currentUser.value = JSON.parse(localStorage.getItem('currentUser'))
+  } catch (error) {
+    currentUser.value = null
+    console.error('No user found:', error)
+  }
 }
+
+// Fonction pour calculer les liens en fonction de currentUser
+function updateLinksList() {
+  if (currentUser.value) {
+    const userType = currentUser.value.userType
+    if (userType === 'Entreprise') {
+      linksList.value = [
+        { title: 'Home', icon: 'home', link: '/' },
+        { title: 'Mon Profil', icon: 'business', link: '/profile/'+currentUser.value.id },
+        { title: 'Messagerie', icon: 'chat', link: '/messagerie' },
+        { title: 'Répertoire', icon: 'record_voice_over', link: '/contacts' },
+      ]
+    } else if (userType === 'Individu') {
+      linksList.value = [
+        { title: 'Home', icon: 'home', link: '/' },
+        { title: 'Mon Profil ', icon: 'person', link: '/profile/'+currentUser.value.id },
+        { title: 'Messagerie', icon: 'chat', link: '/messagerie' },
+        { title: 'Répertoire', icon: 'record_voice_over', link: '/contacts' },
+      ]
+    }
+  } else {
+    linksList.value = [
+      { title: 'Home', icon: 'home', link: '/' },
+      { title: 'Connexion', icon: 'login', link: '/login' },
+    ]
+  }
+}
+
+// Effectuer le rafraîchissement du layout à l'initialisation
+onMounted(() => {
+  fetchCurrentUser()
+  updateLinksList()
+
+  // Surveillance de changes dans localStorage pour currentUser
+  const interval = setInterval(() => {
+    const newUser = localStorage.getItem('currentUser')
+    if (JSON.stringify(currentUser.value) !== newUser) {
+      fetchCurrentUser() // Mettre à jour currentUser
+      updateLinksList()   // Mettre à jour la liste des liens
+    }
+  }, 3000) // Vérification toutes les 3 secondes
+
+  // Nettoyage lors de la destruction du composant
+  onBeforeUnmount(() => {
+    clearInterval(interval)
+  })
+})
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+function navigateTo(link) {
+  router.push(link)
 }
 </script>
