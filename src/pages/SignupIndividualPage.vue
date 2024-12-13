@@ -167,7 +167,7 @@ const router = useRouter()
 
 // Les données du formulaire
 const formData = ref({
-  UserType: 'Individu',
+  userType: 'Individu',
   name: '',
   surname: '',
   adresse: '',
@@ -226,7 +226,7 @@ function handleSignup() {
 
   // Sauvegarder dans localStorage
   localStorage.setItem('users', JSON.stringify(existingUsers))
-  const currentUser = { id: newUser.id, userType: newUser.type, name: newUser.name, surname: newUser.surname }
+  const currentUser = { id: newUser.id, userType: newUser.userType, name: newUser.name, surname: newUser.surname }
   localStorage.setItem('currentUser', JSON.stringify(currentUser))
 
   // Redirection vers une autre page après l'inscription
